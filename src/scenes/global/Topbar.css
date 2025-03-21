@@ -1,0 +1,123 @@
+  /* Conteneur des notifications */
+  .notifications-container {
+    position: relative;
+  }
+  
+  /* Badge de notification */
+  .notification-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #ef4444;
+    color: white;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Popup des notifications */
+  .notifications-popup {
+    position: absolute;
+    top: 48px;
+    right: 0;
+    width: 360px;
+    background-color: #f9f5f5;;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    z-index: 50;
+  }
+  
+  /* En-tête du popup */
+  .notifications-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  
+  .notifications-header h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+  }
+  
+  /* Contenu des notifications */
+  .notifications-content {
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  
+  /* Élément de notification */
+  .notification-item {
+    padding: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .notification-item:hover {
+    background-color: #f3f4f6;
+  }
+  
+  .notification-item.unread {
+    background-color: #f0f9ff;
+  }
+  
+  .notification-title {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+  
+  .notification-message {
+    color: #4b5563;
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .notification-date {
+    color: #9ca3af;
+    font-size: 0.75rem;
+  }
+  
+  /* Message quand il n'y a pas de notifications */
+  .no-notifications {
+    padding: 2rem;
+    text-align: center;
+    color: #6b7280;
+  }
+
+  /* Styles communs pour les boutons d'icônes */
+.icon-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    background: transparent;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    position: relative;
+  }
+  
+  .icon-button:hover {
+    background-color: rgba(59, 130, 246, 0.1);
+    transform: scale(1.05);
+  }
+  
+  .icon-button:active {
+    transform: scale(0.95);
+  }
+  
+  .icon-button .topbar-icon {
+    color: #64748b;
+    transition: color 0.2s ease-in-out;
+  }
+  
+  .icon-button:hover .topbar-icon {
+    color: #3b82f6;
+  }
