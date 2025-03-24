@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
-import Topbar from "./scenes/global/Topbar";
+import TopbarTI from "./scenes/global/Topbar";
 import Sidebar from "./scenes/global/Sidebar";
 import TopbarU from "./scenes/global/TopbarU";
 import SidebarU from "./scenes/global/SidebarU";
@@ -28,6 +28,14 @@ import DemandeL from "./scenes/demandeList";
 import UserRegistrationForm from "./scenes/registrationU";
 import Modem from "./scenes/modem";
 import FormA from "./scenes/registrationAdmin";
+import CreeDemande from "./scenes/creeDemande";
+import DemandeLA from "./scenes/demandeListA";
+import Proposition from "./scenes/proposition";
+import UserProfile from "./scenes/UserProfil";
+import EditProfileA from "./scenes/EditProfilA";
+import EditPasswordA from "./scenes/EditePassA";
+import EditProfileTI from "./scenes/EditProfilTI";
+import EditPasswordTI from "./scenes/EditePassTI";
 
 
 function App() {
@@ -63,7 +71,7 @@ function App() {
             <main className="content">
             {!isLoginPage && (
                 <>
-                  {user?.role === "TI" ? <Topbar setIsSidebar={setIsSidebar} /> : <TopbarU setIsSidebar={setIsSidebar} />}
+                  {user?.role === "TI" ? <TopbarTI setIsSidebar={setIsSidebar} /> : <TopbarU setIsSidebar={setIsSidebar} />}
                 </>
               )}
               <Routes>
@@ -87,7 +95,15 @@ function App() {
                   
                   <Route path="/proposition-list" element={<DemandeL />} />
                   <Route path="/intervention/:idDemande" element={<InterventionPage />} />
+                  <Route path="/proposition/:idDemande" element={<Proposition />} />
                   <Route path="/add-users" element={<UserRegistrationForm />} />
+                  <Route path="/cree-demande" element={<CreeDemande />} />
+                  <Route path="/liste-demande" element={<DemandeLA />} />
+                  <Route path="/profil" element={<UserProfile />} />
+                  <Route path="/edit-profileA" element={<EditProfileA />} />
+                  <Route path="/edit-profileTI" element={<EditProfileTI />} />
+                  <Route path="/edit-passwordA" element={<EditPasswordA />} />
+                  <Route path="/edit-passwordTI" element={<EditPasswordTI />} />
                 
                 </Route>
               </Routes>

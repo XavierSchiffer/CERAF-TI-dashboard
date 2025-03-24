@@ -33,21 +33,22 @@ const TopbarU = () => {
   const location = useLocation();
   const [showSettings, setShowSettings] = useState(false);
 
+  // Récupérer les notifications non lues
   const fetchNotifications = async () => {
     try {
-      const response = await apiDemande.get("/alertes/non_lues/", {
+      const response = await apiDemande.get("notifications/non_lues/", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setNotifications(response.data.alertes);
       setUnreadCount(response.data.alertes.length);
     } catch (error) {
-      console.error("❌ Erreur lors du chargement des notifications :", error);
+      console.error("Erreur lors du chargement des notifications :", error);
     }
   };
 
   useEffect(() => {
     fetchNotifications();
-    const interval = setInterval(fetchNotifications, 5 * 60 * 1000); // Actualiser les notifications toutes les 5 minutes
+    const interval = setInterval(fetchNotifications, 5 * 60 * 1000);
     return () => clearInterval(interval);
   }, [token]);
 
@@ -61,24 +62,21 @@ const TopbarU = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleNotificationClick = () => {
-    setShowNotifications(!showNotifications);
-  };
-
+  // Marquer une notification comme lue
   const markAsRead = async (notificationId) => {
     try {
-      await apiDemande.put(`/alertes/read/${notificationId}/`, {}, {
+      await apiDemande.put(`notifications/lues/${notificationId}/`, {}, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setNotifications((prevNotifications) =>
-        prevNotifications.map((notif) =>
-          notif.id === notificationId ? { ...notif, read: true } : notif
+      setNotifications((prev) =>
+        prev.map((notif) =>
+          notif.id === notificationId ? { ...notif, statut_lecture: true } : notif
         )
       );
-      setUnreadCount((prevCount) => Math.max(0, prevCount - 1));
+      setUnreadCount((prev) => Math.max(0, prev - 1));
       fetchNotifications();
     } catch (error) {
-      console.error("❌ Erreur lors du marquage comme lu :", error);
+      console.error("Erreur lors du marquage comme lu :", error);
     }
   };
 

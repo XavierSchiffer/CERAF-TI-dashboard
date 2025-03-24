@@ -125,7 +125,7 @@ const InterventionPage = () => {
         setInterventionData(formattedData);
   
         setSuccess("Intervention enregistrée avec succès");
-        setTimeout(() => navigate("/dashboard"), 2000);
+        setTimeout(() => navigate("/dashboardTI"), 2000);
       } else {
         setError(response.data.message || "Erreur lors de l'enregistrement de l'intervention");
       }

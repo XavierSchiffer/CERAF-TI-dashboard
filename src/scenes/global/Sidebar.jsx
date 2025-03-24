@@ -195,8 +195,13 @@ const Sidebar = () => {
                 selected={selected}
                 setSelected={setSelected}
               />
-  
-              
+              <Item
+                title="Liste des demandes"
+                to="/liste-demande"
+                icon={<FactoryOutlinedIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />              
   
             {/* PAGES SECTION */}
             {!isCollapsed && (
@@ -240,8 +245,8 @@ const Sidebar = () => {
                 setSelected={setSelected}
               />
               <Item
-                title="Cree Secteur"
-                to="/faq"
+                title="Cree demande"
+                to="/cree-demande"
                 icon={<AgricultureOutlinedIcon />}
                 selected={selected}
                 setSelected={setSelected}
