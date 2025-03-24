@@ -33,10 +33,10 @@ function Login() {
             
             if (user.role === "TI") {
                 console.log("➡️ Redirection vers /dashboardA");
-                navigate("/dashboard"); // 🔹 Rediriger les admins
+                navigate("/dashboardTI"); // 🔹 Rediriger les admins
             } else {
                 console.log("➡️ Redirection vers /dashboardU");
-                navigate("/dashboardU"); // 🔹 Rediriger les autres utilisateurs
+                navigate("/dashboard"); // 🔹 Rediriger les autres utilisateurs
             }
         } else {
             alert("Échec de la connexion, vérifiez vos identifiants.");

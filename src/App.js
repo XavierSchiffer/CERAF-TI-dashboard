@@ -5,8 +5,10 @@ import Sidebar from "./scenes/global/Sidebar";
 import TopbarU from "./scenes/global/TopbarU";
 import SidebarU from "./scenes/global/SidebarU";
 import Dashboard from "./scenes/dashboard";
+import DashboardTI from "./scenes/dashboardTI";
 import InterventionPage from "./scenes/intervention";
 import Team from "./scenes/team";
+import TeamTI from "./scenes/teamTech";
 import Invoices from "./scenes/invoices";
 import Contacts from "./scenes/contacts";
 import Bar from "./scenes/bar";
@@ -23,6 +25,9 @@ import Login from "./scenes/Login";
 import PrivateRoute from "./components/PrivateRoute";
 import { useAuth } from "./context/AuthContext"; // Correction ici
 import DemandeL from "./scenes/demandeList";
+import UserRegistrationForm from "./scenes/registrationU";
+import Modem from "./scenes/modem";
+import FormA from "./scenes/registrationAdmin";
 
 
 function App() {
@@ -36,7 +41,7 @@ function App() {
     useEffect(() => {
       if (user && location.pathname === "/") {
         if (user.role === "TI") {
-          window.location.href = "/dashboardU"; // Redirige admin
+          window.location.href = "/dashboardTI"; // Redirige admin
         } else {
           window.location.href = "/dashboard"; // Redirige utilisateur
         }
@@ -65,19 +70,24 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route element={<PrivateRoute />}>
                   <Route path="/dashboard" element={<Dashboard />} />
-                  <Route path="/team" element={<Team />} />
+                  <Route path="/dashboardTI" element={<DashboardTI />} />
+                  <Route path="/list-abonne" element={<Team />} />
+                  <Route path="/list-tech" element={<TeamTI />} />
                   <Route path="/contacts" element={<Contacts />} />
                   <Route path="/invoices" element={<Invoices />} />
                   <Route path="/form" element={<Form />} />
+                  <Route path="/formA" element={<FormA />} />
                   <Route path="/bar" element={<Bar />} />
                   <Route path="/pie" element={<Pie />} />
                   <Route path="/line" element={<Line />} />
                   <Route path="/faq" element={<FAQ />} />
+                  <Route path="/cree-modem" element={<Modem />} />
                   <Route path="/calendar" element={<Calendar />} />
                   <Route path="/geography" element={<Geography />} />
                   
                   <Route path="/proposition-list" element={<DemandeL />} />
                   <Route path="/intervention/:idDemande" element={<InterventionPage />} />
+                  <Route path="/add-users" element={<UserRegistrationForm />} />
                 
                 </Route>
               </Routes>

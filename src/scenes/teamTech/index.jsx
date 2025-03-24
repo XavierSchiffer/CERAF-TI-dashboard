@@ -31,7 +31,7 @@ import { tokens } from '../../theme';
 import { apiFruit } from '../../api';
 import { apiAccount } from '../../api';
 
-const Team = () => {
+const TeamTI = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const navigate = useNavigate();
@@ -118,7 +118,7 @@ const Team = () => {
       // Fonction pour récupérer les utilisateurs
   const fetchUsers = async () => {
     try {
-      const response = await apiAccount.get("sadmin/list/abonnes", {
+      const response = await apiAccount.get("sadmin/list/techniciens/", {
         headers: { Authorization: `Bearer ${token}` },
       });
       // Vérification et extraction correcte des données
@@ -188,8 +188,8 @@ const Team = () => {
         mb={2}
       >
         <Header 
-          title="ABONNE"
-          subtitle="Gestion des abonnés du système" 
+          title="TECHNICIENS"
+          subtitle="Gestion des techniciens du système" 
         />
       </Box>
       <Box
@@ -256,4 +256,4 @@ const Team = () => {
   );
 };
 
-export default Team;
+export default TeamTI;
