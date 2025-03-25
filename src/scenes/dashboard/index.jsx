@@ -1,16 +1,15 @@
 import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../theme";
-import { mockTransactions } from "../../data/mockData";
+import EngineeringIcon from "@mui/icons-material/Engineering";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
-import EmailIcon from "@mui/icons-material/Email";
-import PointOfSaleIcon from "@mui/icons-material/PointOfSale";
+import BuildIcon from "@mui/icons-material/Build";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import TrafficIcon from "@mui/icons-material/Traffic";
-import Header from "../../components/Header";
+import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";import Header from "../../components/Header";
 import LineChart from "../../components/LineChart";
 import PieChart from "../../components/PieChart";
 import GeographyChart from "../../components/GeographyChart";
-// import BarChart from "../../components/BarChart";
+import BarChart from "../../components/BarChart";
 // import BarChartMonthly from "../../components/BarChartMonthly";
 import StatBox from "../../components/StatBox";
 import ProgressCircle from "../../components/ProgressCircle";
@@ -227,12 +226,6 @@ const DashboardTI = () => {
   }, []);
 
   useEffect(() => {
-    // const fetchBarData = async () => {
-    //   const res = await apiIntervention.get("sadmin/barchart/interventions/", {
-    //     headers: { Authorization: `Bearer ${token}` },
-    //   });
-    //   setBarData(res.data);
-    // };
 
     const fetchPieData = async () => {
       const res = await apiIntervention.get("sadmin/piechart/interventions/", {
@@ -241,35 +234,9 @@ const DashboardTI = () => {
       setPieData(res.data);
     };
 
-    // fetchBarData();
     fetchPieData();
   }, []);
 
-  // useEffect(() => {
-  //   const fetchBarData = async () => {
-  //     try {
-  //       const res = await apiIntervention.get("sadmin/barchart/interventions/monthly/", {
-  //         headers: { Authorization: `Bearer ${token}` },
-  //       });
-  
-  //       const responseData = res.data;
-  
-  //       if (Array.isArray(responseData) && responseData.length > 0) {
-  //         // Extraire les noms des techniciens dynamiquement
-  //         const dynamicKeys = Object.keys(responseData[0]).filter((key) => key !== "mois");
-  //         setKeys(dynamicKeys);      // <- keys = noms de techniciens
-  //         setData(responseData);     // <- data = tableau des mois avec les valeurs
-  //       }
-  //     } catch (error) {
-  //       console.error("❌ Erreur lors du chargement des données BarChart :", error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-  
-  //   fetchBarData();
-  // }, [token]);
-  
   return (
     <Box m="20px">
       {/* HEADER */}
@@ -308,13 +275,14 @@ const DashboardTI = () => {
             alignItems="center"
             justifyContent="center"
           >
+
             <StatBox
               title={loading ? "Chargement..." : adminCount}
               subtitle="Nombre(s) d'administrateur(s)"
               progress="0.30"
               increase="+5%"
               icon={
-                <PersonAddIcon sx={{ color: colors.greenAccent[600], fontSize: "26px" }} />
+                <AdminPanelSettingsIcon  sx={{ color: colors.greenAccent[600], fontSize: "26px" }} />
               }
             />
         </Box>
@@ -331,7 +299,7 @@ const DashboardTI = () => {
               progress="0.30"
               increase="+5%"
               icon={
-                <PersonAddIcon sx={{ color: colors.greenAccent[600], fontSize: "26px" }} />
+                <BuildIcon  sx={{ color: colors.greenAccent[600], fontSize: "26px" }} />
               }
             />
           </Box>
@@ -348,7 +316,7 @@ const DashboardTI = () => {
               progress="0.30"
               increase="+5%"
               icon={
-                <PersonAddIcon sx={{ color: colors.greenAccent[600], fontSize: "26px" }} />
+                <EngineeringIcon sx={{ color: colors.greenAccent[600], fontSize: "26px" }} />
               }
             />
         </Box>
@@ -370,6 +338,7 @@ const DashboardTI = () => {
             />
           </Box>
         {/* ROW 2 */}
+
         <Box
           gridColumn="span 8"
           gridRow="span 2"
@@ -448,17 +417,7 @@ const DashboardTI = () => {
       </Box>
 
         {/* ROW 3 */}
-        {/* <Box gridColumn="span 12" gridRow="span 2" backgroundColor={colors.primary[400]} p="20px">
-          <Typography variant="h5" fontWeight="600" mb="10px">
-            Interventions mensuelles par technicien
-          </Typography>
-          <Box height="350px">
-            <BarChartMonthly token={token} />
-          </Box>
-        </Box> */}
-
-
-      <Box gridColumn="span 4" gridRow="span 2" backgroundColor={colors.primary[400]} padding={"30px"}>
+      <Box gridColumn="span 8" gridRow="span 2" backgroundColor={colors.primary[400]} padding={"30px"}>
         <Typography variant="h5" fontWeight="600" sx={{ padding: "30px" }}>
           Répartition des Interventions (Pie)
         </Typography>
@@ -483,6 +442,8 @@ const DashboardTI = () => {
             <GeographyChart isDashboard={true} />
           </Box>
         </Box>
+
+
       </Box>
     </Box>
   );

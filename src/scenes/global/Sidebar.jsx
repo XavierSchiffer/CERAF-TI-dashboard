@@ -12,7 +12,8 @@ import FactoryOutlinedIcon from "@mui/icons-material/FactoryOutlined";
 import AgricultureOutlinedIcon from "@mui/icons-material/AgricultureOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
-import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
+import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
+import Header from "../../components/Header";
 import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
@@ -20,6 +21,10 @@ import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import AuthContext from "../../context/AuthContext";
 // import { apiFruit } from "../../api";
 import { useContext } from "react";
+import EngineeringIcon from "@mui/icons-material/Engineering";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
+
 
 
 
@@ -169,7 +174,7 @@ const Sidebar = () => {
               <Item
                 title="Listes techniciens"
                 to="/list-tech"
-                icon={<PeopleOutlinedIcon />}
+                icon={<EngineeringIcon />}
                 selected={selected}
                 setSelected={setSelected}
               />
@@ -183,18 +188,18 @@ const Sidebar = () => {
               <Item
                 title="Listes administrateurs"
                 to="/teamA"
-                icon={<PeopleOutlinedIcon />}
+                icon={<AdminPanelSettingsIcon />}
                 selected={selected}
                 setSelected={setSelected}
               />
 
-              <Item
+              {/* <Item
                 title="Liste secteurs"
                 to="/invoices"
                 icon={<FactoryOutlinedIcon />}
                 selected={selected}
                 setSelected={setSelected}
-              />
+              /> */}
               <Item
                 title="Liste des demandes"
                 to="/liste-demande"
@@ -226,14 +231,15 @@ const Sidebar = () => {
                 <Item
                 title="Ajouter Utilisateur"
                 to="/add-users"
-                icon={<PersonOutlinedIcon />}
+                icon={<PersonAddIcon />}
                 selected={selected}
                 setSelected={setSelected}
               />
+
                 <Item
                 title="Ajouter Administrateur"
                 to="/formA"
-                icon={<PersonOutlinedIcon />}
+                icon={<VerifiedUserIcon />}
                 selected={selected}
                 setSelected={setSelected}
               />
@@ -286,7 +292,20 @@ const Sidebar = () => {
                 selected={selected}
                 setSelected={setSelected}
               />
-  
+              <Item
+                title="Pie Chart"
+                to="/pie"
+                icon={<PieChartOutlineOutlinedIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+              <Item
+                title="Line Chart"
+                to="/line"
+                icon={<TimelineOutlinedIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
           </Box>
   
           {/* LOGOUT SECTION */}

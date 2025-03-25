@@ -15,14 +15,14 @@ const LineChart = ({ data = [], isDashboard = false }) => {
           legend: { text: { fill: colors.grey[100] } },
           ticks: {
             line: { stroke: colors.grey[100], strokeWidth: 1 },
-            text: { fill: colors.grey[100] },
+            text: { fill: colors.grey[100], fontSize: 12 },
           },
         },
         legends: { text: { fill: colors.grey[100] } },
         tooltip: { container: { color: colors.primary[500] } },
       }}
       colors={isDashboard ? { datum: "color" } : { scheme: "nivo" }}
-      margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
+      margin={{ top: 50, right: 160, bottom: 50, left: 50 }}
       xScale={{ type: "point" }}
       yScale={{
         type: "linear",
@@ -50,6 +50,7 @@ const LineChart = ({ data = [], isDashboard = false }) => {
         tickPadding: 5,
         tickRotation: 0,
         legendOffset: -40,
+        legend: "Nombre d'intervention",
         legendPosition: "middle",
       }}
       enableGridX={false}
@@ -64,11 +65,12 @@ const LineChart = ({ data = [], isDashboard = false }) => {
         {
           anchor: "bottom-right",
           direction: "column",
-          translateX: 100,
-          itemWidth: 80,
+          translateX: 140,
+          itemWidth: 120,
           itemHeight: 20,
           symbolSize: 12,
           symbolShape: "circle",
+          // text
         },
       ]}
     />
