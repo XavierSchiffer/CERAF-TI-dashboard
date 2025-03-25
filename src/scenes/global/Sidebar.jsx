@@ -10,7 +10,7 @@ import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 import FactoryOutlinedIcon from "@mui/icons-material/FactoryOutlined";
 import AgricultureOutlinedIcon from "@mui/icons-material/AgricultureOutlined";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import Header from "../../components/Header";
@@ -193,13 +193,13 @@ const Sidebar = () => {
                 setSelected={setSelected}
               />
 
-              {/* <Item
-                title="Liste secteurs"
-                to="/invoices"
+              <Item
+                title="Liste Interventions"
+                to="/intervention-listA"
                 icon={<FactoryOutlinedIcon />}
                 selected={selected}
                 setSelected={setSelected}
-              /> */}
+              />
               <Item
                 title="Liste des demandes"
                 to="/liste-demande"
@@ -253,7 +253,7 @@ const Sidebar = () => {
               <Item
                 title="Cree demande"
                 to="/cree-demande"
-                icon={<AgricultureOutlinedIcon />}
+                icon={<CheckCircleOutlineIcon />}
                 selected={selected}
                 setSelected={setSelected}
               />

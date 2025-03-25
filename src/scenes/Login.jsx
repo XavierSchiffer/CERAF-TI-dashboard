@@ -1,7 +1,10 @@
 import React, { useState, useContext } from "react";
 import AuthContext from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { FaLock, FaUser } from "react-icons/fa";
+import { FaBuilding, FaFacebook, FaTwitter, FaWhatsapp, FaEnvelope, FaLock } from "react-icons/fa";
+// import {  } from 'react-icons/fa';
+import { FaUser } from "react-icons/fa";
+
 import './Login.css';
 // import React from "react";
 
@@ -10,79 +13,145 @@ function Login() {
     const { login, user } = useContext(AuthContext);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("");
+    const [isRegistering, setIsRegistering] = useState(false);
+    const [error, setError] = useState("");
     const navigate = useNavigate();
 
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     const success = await login(username, password);
-    //     if (success) {
-    //         navigate("/dashboard");
-    //     } else {
-    //         alert("Échec de la connexion, vérifiez vos identifiants.");
-    //     }
-    // };
-    
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const user = await login(username, password); // 🔹 Récupère l'utilisateur connecté
-    
-        console.log("🔍 Utilisateur connecté :", user); // Ajout pour vérifier les données
-    
-        if (user) {
-            console.log("👀 Rôle de l'utilisateur :", user.role); // Vérifie le rôle récupéré
+        try {
+            const userData = { username, email, password };
+            let user;
             
-            if (user.role === "TI") {
-                console.log("➡️ Redirection vers /dashboardA");
-                navigate("/dashboardTI"); // 🔹 Rediriger les admins
+            if (isRegistering) {
+                // Implement registration logic here if needed
+                console.log('Registration would happen here');
+                // user = await registerUser(userData);
             } else {
-                console.log("➡️ Redirection vers /dashboardU");
-                navigate("/dashboard"); // 🔹 Rediriger les autres utilisateurs
+                user = await login(username, password);
+                console.log("🔍 Utilisateur connecté :", user);
+
+                if (user) {
+                    console.log("👀 Rôle de l'utilisateur :", user.role);
+                    
+                    if (user.role === "TI") {
+                        console.log("➡️ Redirection vers /dashboardTI");
+                        navigate("/dashboardTI");
+                    } else {
+                        console.log("➡️ Redirection vers /dashboard");
+                        navigate("/dashboard");
+                    }
+                }
             }
-        } else {
-            alert("Échec de la connexion, vérifiez vos identifiants.");
+            
+            setError('');
+        } catch (err) {
+            console.error('Erreur lors de la soumission:', err);
+            setError('Informations incorrectes');
         }
     };
+
     return (
-        <div className="login-container">
-            <div className="wrapper">
-                <h1>Login</h1>
-                <form onSubmit={handleSubmit}>
-                    <div className="input-box">
-                        <input
-                            type="text"
-                            placeholder="Nom d'utilisateur"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)} />
-                        <FaUser className="icon" />
-                    </div>
-
-                    <div className="input-box">
-                        {/* <Lock className="absolute left-3 top-3 text-white" /> */}
-                        <input
-                            type="password"
-                            placeholder="Mot de passe"
-                            className="w-full pl-10 p-3 bg-white bg-opacity-20 text-white rounded-lg border border-white focus:outline-none"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)} />
-                        <FaLock className="icon" />
-                    </div>
-
-                    {/* Options */}
-                    <div className="remember-forgot">
-                        <label>
-                            <input type="checkbox" className="mr-2" /> Remember me
-                        </label>
-                        <a href="#" className="hover:underline">Forgot password?</a>
-                    </div>
-
-                    {/* Bouton Login */}
-                    <button
-                        className="w-full bg-white text-purple-900 font-bold py-3 rounded-lg hover:bg-purple-700 hover:text-white transition"
-                        type="submit"
-                    >
-                        Se connecter
+        <div>
+            <header className="login-header">
+                {/* <form action="" className="login-search-bar">
+                    <input required type="text" placeholder="Search..." />
+                    <button type="submit" className="login-search-btn">
+                        <FaSearch className="FaSearch" />
                     </button>
-                </form>
+                </form> */}
+            </header>
+            <div className="background">
+                <div className="login-container">
+                    <div className="content">
+                        <h2 className="logo">
+                            <FaBuilding className="FarBuilding" />
+                            CERAF Centre
+                        </h2>
+                        <div className="text-sci">
+                            <h2>
+                                Bienvenue!
+                                <br />
+                                <span>sur la plateforme des soldier connect</span>
+                            </h2>
+                            <p>Soyez plus que jamais optimal dans vos missions quotidiennes</p>
+                            <div className="social-icons">
+                                <a href="">
+                                    <FaWhatsapp className="i FaWhatsapp" />
+                                </a>
+                                <a href="">
+                                    <FaFacebook className="i FaFacebook" />
+                                </a>
+                                <a href="">
+                                    <FaTwitter className="i FaTwitter" />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="logred-box">
+                        <div className="form-box login">
+                            <form onSubmit={handleSubmit}>
+                                <h2>{isRegistering ? 'Sign Up' : 'Sign In'}</h2>
+                                {isRegistering && (
+                                    <div className="input-box">
+                                        <span className="icon">
+                                            <FaEnvelope />
+                                        </span>
+                                        <input
+                                            type="email"
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
+                                            required
+                                        />
+                                        <label htmlFor="">Email</label>
+                                    </div>
+                                )}
+                                <div className="input-box">
+                                    <span className="icon">
+                                        <FaUser />
+                                    </span>
+                                    <input
+                                        type="text"
+                                        value={username}
+                                        onChange={(e) => setUsername(e.target.value)}
+                                        required
+                                    />
+                                    <label htmlFor="">Nom d'utilisateur</label>
+                                </div>
+                                <div className="input-box">
+                                    <span className="icon">
+                                        <FaLock />
+                                    </span>
+                                    <input
+                                        type="password"
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        required
+                                    />
+                                    <label htmlFor="">Mot de passe</label>
+                                </div>
+                                <div className="remember-forgot">
+                                    <input type="checkbox" />
+                                    <label htmlFor="">Remember me</label>
+                                    {/* <a href="">Forgot password?</a> */}
+                                </div>
+                                <button type="submit" className="btn">
+                                    {isRegistering ? 'Sign Up' : 'Se Connecter'}
+                                </button>
+                                {/* <div className="login-register">
+                                    <p>
+                                        {isRegistering ? "Already have an account?" : "Don't have an account?"}{' '}
+                                        <a href="#" onClick={() => setIsRegistering(!isRegistering)}>
+                                            {isRegistering ? 'Sign In' : 'Sign Up'}
+                                        </a>
+                                    </p>
+                                </div> */}
+                            </form>
+                            {error && <p className="error">{error}</p>}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     );

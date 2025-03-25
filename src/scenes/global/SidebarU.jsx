@@ -17,7 +17,7 @@ import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import AuthContext from "../../context/AuthContext";
-// import { apiFruit } from "../../api";
+import FactoryOutlinedIcon from "@mui/icons-material/FactoryOutlined";
 import { useContext } from "react";
 
 
@@ -89,7 +89,7 @@ const SidebarU = () => {
                 ml="15px"
               >
                 <Typography variant="h3" color={colors.grey[100]}>
-                  TI SYSTEME
+                  TECHS SYSTEME
                 </Typography>
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                   <MenuOutlinedIcon />
@@ -168,18 +168,18 @@ const SidebarU = () => {
             <Item
               title="Consulté Propositions"
               to="/proposition-list"
-              icon={<PeopleOutlinedIcon />}
+              icon={<ReceiptOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Liste Interventions"
-              to="/proposition-list"
-              icon={<PeopleOutlinedIcon />}
+              to="/intervention-list"
+              icon={<FactoryOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
-            <Item
+            {/* <Item
               title="Consulte statistiques"
               to="/statistiques"
               icon={<ReceiptOutlinedIcon />}
@@ -192,8 +192,7 @@ const SidebarU = () => {
               icon={<ReceiptOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
-
+            /> */}
             {/* PAGES SECTION */}
             {!isCollapsed && (
               <Box mt="20px">
@@ -214,13 +213,13 @@ const SidebarU = () => {
                 </Typography>
               </Box>
             )}
-            <Item
+            {/* <Item
               title="Faire rapport"
               to="/rapport"
               icon={<PersonOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
+            /> */}
             <Item
               title="Calendar"
               to="/calendar"
@@ -230,46 +229,7 @@ const SidebarU = () => {
             />
 
             {/* CHARTS SECTION */}
-            {!isCollapsed && (
-              <Box mt="20px">
-                <Divider sx={{ 
-                  m: "15px 0",
-                  borderColor: colors.grey[800],
-                  opacity: 0.5
-                }} />
-                <Typography
-                  variant="h6"
-                  color={colors.grey[300]}
-                  sx={{ 
-                    m: "15px 0 5px 20px",
-                    fontWeight: "bold"
-                  }}
-                >
-                  Charts
-                </Typography>
-              </Box>
-            )}
-            <Item
-              title="Bar Chart"
-              to="/barU"
-              icon={<BarChartOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Pie Chart"
-              to="/pieU"
-              icon={<PieChartOutlineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Line Chart"
-              to="/lineU"
-              icon={<TimelineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
+
           </Box>
 
           {/* LOGOUT SECTION */}

@@ -36,7 +36,15 @@ import EditProfileA from "./scenes/EditProfilA";
 import EditPasswordA from "./scenes/EditePassA";
 import EditProfileTI from "./scenes/EditProfilTI";
 import EditPasswordTI from "./scenes/EditePassTI";
-
+import TeamA from "./scenes/teamA";
+import InterventionList from "./scenes/listI";
+import InterventionDetails from "./scenes/interventionDetail";
+import TechnicianDetails from "./scenes/techsDetail";
+import AdminDetails from "./scenes/adminDetail";
+import AbonneDetails from "./scenes/abonneDetail";
+import InterventionListA from "./scenes/interventionLA";
+import InterventionDetailsA from "./scenes/interventionDetailA";
+import EditInterventionA from "./scenes/editeIntervention";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -95,7 +103,12 @@ function App() {
                   
                   <Route path="/proposition-list" element={<DemandeL />} />
                   <Route path="/intervention/:idDemande" element={<InterventionPage />} />
+                  <Route path="/interventions/details/:id" element={<InterventionDetails />} />
+                  <Route path="/interventions/detailsA/:id" element={<InterventionDetailsA />} />
+                  <Route path="/techs/details/:id" element={<TechnicianDetails />} />
+                  <Route path="/teamA/admins/details/:id" element={<AdminDetails />} />
                   <Route path="/proposition/:idDemande" element={<Proposition />} />
+                  <Route path="/interventions/editA/:id" element={<EditInterventionA />} />
                   <Route path="/add-users" element={<UserRegistrationForm />} />
                   <Route path="/cree-demande" element={<CreeDemande />} />
                   <Route path="/liste-demande" element={<DemandeLA />} />
@@ -104,6 +117,10 @@ function App() {
                   <Route path="/edit-profileTI" element={<EditProfileTI />} />
                   <Route path="/edit-passwordA" element={<EditPasswordA />} />
                   <Route path="/edit-passwordTI" element={<EditPasswordTI />} />
+                  <Route path="/teamA" element={<TeamA />} />
+                  <Route path="/intervention-list" element={<InterventionList />} />
+                  <Route path="/intervention-listA" element={<InterventionListA />} />
+                  <Route path="/abonnes/details/:id" element={<AbonneDetails />} />
                 
                 </Route>
               </Routes>

@@ -78,7 +78,7 @@ const TeamTI = () => {
             justifyContent="center"
             backgroundColor={colors.greenAccent[600]}
             borderRadius="4px"
-          > Users
+          > TECHNICIENS
             <LockOpenOutlinedIcon />
           </Box>
         );
@@ -140,15 +140,20 @@ const TeamTI = () => {
 
   // Gestionnaires d'actions
   const handleViewUser = (user) => {
-    navigate(`/user-details/${user.id}`);
+    navigate(`/techs/details/${user.id}`);
   };
 
   const handleDeleteUser = async (userId) => {
     try {
-      await apiAccount.delete(`/users/${userId}`);
-      setUsers(users.filter(user => user.id !== userId));
+      await apiAccount.patch(`/abonnes/${userId}/deactivate/`, null, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+  
+      setUsers(users.map(user => 
+        user.id === userId ? { ...user, is_active: false } : user
+      ));
     } catch (error) {
-      console.error('Erreur lors de la suppression de l\'utilisateur:', error);
+      console.error("❌ Erreur lors de la désactivation de l'utilisateur :", error);
     }
   };
 
