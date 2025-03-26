@@ -1,17 +1,15 @@
 import React, { useState, useContext } from "react";
+import { motion } from "framer-motion";  // ✅ Import de Framer Motion
 import AuthContext from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { FaBuilding, FaFacebook, FaTwitter, FaWhatsapp, FaEnvelope, FaLock } from "react-icons/fa";
-// import {  } from 'react-icons/fa';
-import { FaUser } from "react-icons/fa";
-
-import './Login.css';
-// import React from "react";
-
+import { FaBuilding, FaFacebook, FaTwitter, FaWhatsapp, FaEnvelope, FaLock, FaUser } from "react-icons/fa";
+import Loader from "./Loader";
+import "./Login.css";
 
 function Login() {
-    const { login, user } = useContext(AuthContext);
+    const { login } = useContext(AuthContext);
     const [username, setUsername] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     const [isRegistering, setIsRegistering] = useState(false);
@@ -20,48 +18,44 @@ function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsLoading(false);
+        setError("");
+
         try {
-            const userData = { username, email, password };
-            let user;
-            
             if (isRegistering) {
-                // Implement registration logic here if needed
-                console.log('Registration would happen here');
-                // user = await registerUser(userData);
+                console.log("Registration would happen here");
             } else {
-                user = await login(username, password);
+                const user = await login(username, password);
                 console.log("🔍 Utilisateur connecté :", user);
 
                 if (user) {
                     console.log("👀 Rôle de l'utilisateur :", user.role);
+                    setIsLoading(true);
                     
-                    if (user.role === "TI") {
-                        console.log("➡️ Redirection vers /dashboardTI");
-                        navigate("/dashboardTI");
-                    } else {
-                        console.log("➡️ Redirection vers /dashboard");
-                        navigate("/dashboard");
-                    }
+                    setTimeout(() => {
+                        if (user.role === "TI") {
+                            navigate("/dashboardTI");
+                        } else {
+                            navigate("/dashboard");
+                        }
+                    }, 3000);
+                } else {
+                    setError("Nom d'utilisateur ou mot de passe incorrect ❌");
                 }
             }
-            
-            setError('');
         } catch (err) {
-            console.error('Erreur lors de la soumission:', err);
-            setError('Informations incorrectes');
+            console.error("Erreur lors de la soumission:", err);
+            setError("Nom d'utilisateur ou mot de passe incorrect ❌");
         }
     };
 
+    if (isLoading) {
+        return <Loader />;
+    }
+
     return (
         <div>
-            <header className="login-header">
-                {/* <form action="" className="login-search-bar">
-                    <input required type="text" placeholder="Search..." />
-                    <button type="submit" className="login-search-btn">
-                        <FaSearch className="FaSearch" />
-                    </button>
-                </form> */}
-            </header>
+            <header className="login-header"></header>
             <div className="background">
                 <div className="login-container">
                     <div className="content">
@@ -77,78 +71,52 @@ function Login() {
                             </h2>
                             <p>Soyez plus que jamais optimal dans vos missions quotidiennes</p>
                             <div className="social-icons">
-                                <a href="">
-                                    <FaWhatsapp className="i FaWhatsapp" />
-                                </a>
-                                <a href="">
-                                    <FaFacebook className="i FaFacebook" />
-                                </a>
-                                <a href="">
-                                    <FaTwitter className="i FaTwitter" />
-                                </a>
+                                <a href="#"><FaWhatsapp className="i FaWhatsapp" /></a>
+                                <a href="#"><FaFacebook className="i FaFacebook" /></a>
+                                <a href="#"><FaTwitter className="i FaTwitter" /></a>
                             </div>
                         </div>
                     </div>
                     <div className="logred-box">
                         <div className="form-box login">
                             <form onSubmit={handleSubmit}>
-                                <h2>{isRegistering ? 'Sign Up' : 'Sign In'}</h2>
+                                <h2>{isRegistering ? "Sign Up" : "Sign In"}</h2>
                                 {isRegistering && (
                                     <div className="input-box">
-                                        <span className="icon">
-                                            <FaEnvelope />
-                                        </span>
-                                        <input
-                                            type="email"
-                                            value={email}
-                                            onChange={(e) => setEmail(e.target.value)}
-                                            required
-                                        />
-                                        <label htmlFor="">Email</label>
+                                        <span className="icon"><FaEnvelope /></span>
+                                        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                                        <label>Email</label>
                                     </div>
                                 )}
                                 <div className="input-box">
-                                    <span className="icon">
-                                        <FaUser />
-                                    </span>
-                                    <input
-                                        type="text"
-                                        value={username}
-                                        onChange={(e) => setUsername(e.target.value)}
-                                        required
-                                    />
-                                    <label htmlFor="">Nom d'utilisateur</label>
+                                    <span className="icon"><FaUser /></span>
+                                    <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} required />
+                                    <label>Nom d'utilisateur</label>
                                 </div>
                                 <div className="input-box">
-                                    <span className="icon">
-                                        <FaLock />
-                                    </span>
-                                    <input
-                                        type="password"
-                                        value={password}
-                                        onChange={(e) => setPassword(e.target.value)}
-                                        required
-                                    />
-                                    <label htmlFor="">Mot de passe</label>
+                                    <span className="icon"><FaLock /></span>
+                                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                                    <label>Mot de passe</label>
                                 </div>
                                 <div className="remember-forgot">
                                     <input type="checkbox" />
-                                    <label htmlFor="">Remember me</label>
-                                    {/* <a href="">Forgot password?</a> */}
+                                    <label>Remember me</label>
                                 </div>
-                                <button type="submit" className="btn">
-                                    {isRegistering ? 'Sign Up' : 'Se Connecter'}
-                                </button>
-                                {/* <div className="login-register">
-                                    <p>
-                                        {isRegistering ? "Already have an account?" : "Don't have an account?"}{' '}
-                                        <a href="#" onClick={() => setIsRegistering(!isRegistering)}>
-                                            {isRegistering ? 'Sign In' : 'Sign Up'}
-                                        </a>
-                                    </p>
-                                </div> */}
+                                <button type="submit" className="btn">{isRegistering ? "Sign Up" : "Se Connecter"}</button>
                             </form>
-                            {error && <p className="error">{error}</p>}
+
+                            {/* ✅ Animation du message d'erreur */}
+                            {error && (
+                                <motion.p 
+                                    className="error"
+                                    initial={{ opacity: 0, y: -10 }}  // Départ invisible, légèrement vers le haut
+                                    animate={{ opacity: 1, y: 0 }}    // Apparition en douceur
+                                    exit={{ opacity: 0, y: -10 }}     // Disparition vers le haut
+                                    transition={{ duration: 0.5 }}    // Durée de l'animation
+                                >
+                                    {error}
+                                </motion.p>
+                            )}
                         </div>
                     </div>
                 </div>

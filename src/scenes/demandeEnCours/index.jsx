@@ -7,7 +7,7 @@ import { apiDemande } from "../../api";
 import Header from "../../components/Header";
 import { tokens } from "../../theme";
 
-const DemandeLA = () => {
+const DemandeEnCours = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [propositions, setPropositions] = useState([]);
@@ -44,41 +44,19 @@ const DemandeLA = () => {
       flex: 2,
     },
     {
-      field: "actions",
-      headerName: "Actions",
-      flex: 1.5,
-      renderCell: (params) => {
-        const isAccepted = acceptedPropositions[params.row.id] || true;
-        
-        return (
-          <Box display="flex" gap={1}>
-            <Button
-                variant="contained"
-                color="primary"
-                size="small"
-                onClick={() => handleIntervention(params.row.id)}
-                sx={{
-                  backgroundColor: colors.blueAccent[600],
-                  '&:hover': {
-                    backgroundColor: colors.blueAccent[700],
-                  }
-                }}
-              >
-                Proposer
-              </Button>
-          </Box>
-        );
-      }
+      field: "technicien_username",
+      headerName: "Technicien gerant la demande",
+      flex: 2,
     }
   ];
 
   useEffect(() => {
     const fetchDemandes = async () => {
       try {
-        const response = await apiDemande.get("list/", {
+        const response = await apiDemande.get("list/demande/en-cours/", {
           headers: { Authorization: `Bearer ${token}` },
         });
-
+        console.log("##### Reponse envoyer ########", response.data)
         // Vérifier si la réponse est au format attendu
         if (response.data && Array.isArray(response.data[0]?.results)) {
           const demandesData = response.data[0].results.flat(); // Aplatir le tableau de propositions
@@ -107,8 +85,8 @@ const DemandeLA = () => {
         mb={2}
       >
         <Header 
-          title="DEMANDE" 
-          subtitle="Liste des demandes en attente" 
+          title="DEMANDE EN COURS" 
+          subtitle="Liste des demandes en cours de traitement" 
         />
       </Box>
 
@@ -176,4 +154,4 @@ const DemandeLA = () => {
   );
 };
 
-export default DemandeLA;
+export default DemandeEnCours;

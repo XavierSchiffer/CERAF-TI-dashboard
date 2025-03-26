@@ -1,0 +1,116 @@
+.loader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    overflow: hidden;
+  }
+  
+  .loader-logo-container {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .loader-logo {
+    max-width: 150px;
+    max-height: 150px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+  }
+  
+  .loader-content {
+    position: relative;
+    text-align: center;
+    background-color: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .color-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.05;
+    z-index: -1;
+    border-radius: 15px;
+  }
+  
+  .loader-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    transition: all 0.5s ease;
+  }
+  
+  .loader-title {
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    transition: all 0.5s ease;
+  }
+  
+  .loader-spinner {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #007bff;
+    border-top: 5px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    transition: border-color 0.5s ease;
+  }
+  
+  .loader-text {
+    font-size: 1rem;
+    transition: all 0.5s ease;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 480px) {
+    .loader-content {
+      padding: 20px;
+      max-width: 90%;
+      width: 90%;
+    }
+  
+    .loader-logo {
+      max-width: 100px;
+      max-height: 100px;
+    }
+  
+    .loader-icon {
+      font-size: 3rem;
+    }
+  
+    .loader-title {
+      font-size: 1.5rem;
+    }
+  
+    .spinner {
+      width: 40px;
+      height: 40px;
+    }
+  }

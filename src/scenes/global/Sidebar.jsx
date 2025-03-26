@@ -24,9 +24,11 @@ import { useContext } from "react";
 import EngineeringIcon from "@mui/icons-material/Engineering";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
-
-
-
+// import Vol from "@mui/icons-material/PersonAdd";
+// import { VolunteerActivism } from "@mui/icons-material";
+import { CleanHands } from "@mui/icons-material";
+import { Summarize } from "@mui/icons-material";
+import { Autorenew } from "@mui/icons-material";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -194,16 +196,23 @@ const Sidebar = () => {
               />
 
               <Item
+                title="Demande en cours"
+                to="/demande-list-en-cours"
+                icon={<Autorenew />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+              <Item
                 title="Liste Interventions"
                 to="/intervention-listA"
-                icon={<FactoryOutlinedIcon />}
+                icon={<Summarize />}
                 selected={selected}
                 setSelected={setSelected}
               />
               <Item
                 title="Liste des demandes"
                 to="/liste-demande"
-                icon={<FactoryOutlinedIcon />}
+                icon={<CleanHands />}
                 selected={selected}
                 setSelected={setSelected}
               />              

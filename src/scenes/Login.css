@@ -281,3 +281,15 @@ body {
 .login-register p a:hover {
     text-decoration: underline;
 }
+/* ########################### */
+
+/* Styles pour le message d'erreur */
+.error {
+    color: #ff4d4d;
+    background: rgba(255, 77, 77, 0.1);
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+}

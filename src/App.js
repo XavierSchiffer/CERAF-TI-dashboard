@@ -45,6 +45,7 @@ import AbonneDetails from "./scenes/abonneDetail";
 import InterventionListA from "./scenes/interventionLA";
 import InterventionDetailsA from "./scenes/interventionDetailA";
 import EditInterventionA from "./scenes/editeIntervention";
+import DemandeEnCours from "./scenes/demandeEnCours";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -112,6 +113,7 @@ function App() {
                   <Route path="/add-users" element={<UserRegistrationForm />} />
                   <Route path="/cree-demande" element={<CreeDemande />} />
                   <Route path="/liste-demande" element={<DemandeLA />} />
+                  <Route path="/demande-list-en-cours" element={<DemandeEnCours />} />
                   <Route path="/profil" element={<UserProfile />} />
                   <Route path="/edit-profileA" element={<EditProfileA />} />
                   <Route path="/edit-profileTI" element={<EditProfileTI />} />
