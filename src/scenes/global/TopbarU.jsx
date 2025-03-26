@@ -36,7 +36,7 @@ const TopbarU = () => {
   // Récupérer les notifications non lues
   const fetchNotifications = async () => {
     try {
-      const response = await apiDemande.get("notifications/non_lues/", {
+      const response = await apiDemande.get("alertes/non_lues/", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setNotifications(response.data.alertes);
@@ -63,14 +63,14 @@ const TopbarU = () => {
   }, []);
 
   // Marquer une notification comme lue
-  const markAsRead = async (notificationId) => {
+  const markAsRead = async (alerteId) => {
     try {
-      await apiDemande.put(`notifications/lues/${notificationId}/`, {}, {
+      await apiDemande.put(`alertes/lues/${alerteId}/`, {}, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setNotifications((prev) =>
         prev.map((notif) =>
-          notif.id === notificationId ? { ...notif, statut_lecture: true } : notif
+          notif.id === alerteId ? { ...notif, statut_lecture: true } : notif
         )
       );
       setUnreadCount((prev) => Math.max(0, prev - 1));

@@ -36,6 +36,19 @@ const DashboardTI = () => {
   const [barData, setBarData] = useState([]);
   const [pieData, setPieData] = useState([]);
 
+  const formatDateFr = (isoDateStr) => {
+    if (!isoDateStr) return "Non disponible";
+    const date = new Date(isoDateStr);
+    return date.toLocaleString("fr-FR", {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+      // hour: "2-digit",
+      // minute: "2-digit",
+    });
+  };
+  
+
   const handleDownload = async () => {
     try {
       // Envoi de la requête GET pour télécharger le fichier Excel
@@ -238,6 +251,11 @@ const DashboardTI = () => {
     fetchPieData();
   }, []);
 
+  const parseFrenchDate = (dateStr) => {
+    const [day, month, year] = dateStr.split("/");
+    return new Date(`${year}-${month}-${day}`);
+  };
+
   return (
     <Box m="20px">
       {/* HEADER */}
@@ -392,7 +410,18 @@ const DashboardTI = () => {
         </Box>
 
         {loading ? (
-          <Typography color={colors.grey[100]} p="15px">Chargement...</Typography>
+          <Typography color={colors.grey[100]} p="15px">
+            Chargement...
+          </Typography>
+        ) : users.length === 0 ? (
+          <Typography
+            color={colors.redAccent[400]}
+            fontWeight="bold"
+            textAlign="center"
+            p="15px"
+          >
+            Aucune intervention enregistrée ce mois.
+          </Typography>
         ) : (
           users.map((user) => (
             <Box
@@ -405,12 +434,12 @@ const DashboardTI = () => {
             >
               <Box>
                 <Typography color={colors.greenAccent[500]} variant="h5" fontWeight="600">
-                  {user.nombre_interventions} interventions
+                  {user.nombre_interventions} intervention{user.nombre_interventions > 1 ? "s" : ""}
                 </Typography>
                 <Typography color={colors.grey[100]}>{user.username}</Typography>
               </Box>
               <Box color={colors.grey[100]}>
-                {new Date(user.created_at).toLocaleDateString()}
+                {formatDateFr(user.derniere_intervention)}
               </Box>
             </Box>
           ))

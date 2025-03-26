@@ -75,44 +75,49 @@ const InterventionPage = () => {
     console.log("ID de la demande avant l'envoi:", idDemande);  // Vérifiez l'ID ici
     setLoading(true);
     try {
-      const response = await apiIntervention.post(`/send/${idDemande}/`, {
-        date: values.date,
-        region: values.region,
-        ville: values.ville,
-        ceraf: values.ceraf,
-        fat: values.fat,
-        quartier: values.quartier,
-        localisation: values.localisation,
-        longitude: values.longitude,
-        latitude: values.latitude,
-        type_appui: values.type_appui,
-        etat_appui: values.etat_appui,
-        etiquetage_externe: values.etiquetage_externe,
-        etat: values.etat,
-        nombre_splitter: values.nombre_splitter,
-  
-        // Splitter 1
-        ports_physiques_spl1: values.ports_physiques_spl1,
-        puissance_entree_spl1: values.puissance_entree_spl1,
-        puissance_sortie_spl1: values.puissance_sortie_spl1,
-        fsp_spl1: values.fsp_spl1,
-        olt_spl1: values.olt_spl1,
-        ports_actifs_spl1: values.ports_actifs_spl1,
-  
-        // Splitter 2
-        ports_physiques_spl2: values.ports_physiques_spl2,
-        puissance_entree_spl2: values.puissance_entree_spl2,
-        puissance_sortie_spl2: values.puissance_sortie_spl2,
-        fsp_spl2: values.fsp_spl2,
-        olt_spl2: values.olt_spl2,
-        ports_actifs_spl2: values.ports_actifs_spl2,
-  
-        fdt: values.fdt,
-        central: values.central,
-        remarque: values.remarque
-      }, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+const payload = {
+  date: values.date,
+  region: values.region,
+  ville: values.ville,
+  ceraf: values.ceraf,
+  fat: values.fat,
+  quartier: values.quartier,
+  localisation: values.localisation,
+  longitude: values.longitude,
+  latitude: values.latitude,
+  type_appui: values.type_appui,
+  etat_appui: values.etat_appui,
+  etiquetage_externe: values.etiquetage_externe,
+  etat: values.etat,
+  nombre_splitter: values.nombre_splitter,
+
+  // Splitter 1 toujours inclus
+  ports_physiques_spl1: values.ports_physiques_spl1,
+  puissance_entree_spl1: values.puissance_entree_spl1,
+  puissance_sortie_spl1: values.puissance_sortie_spl1,
+  fsp_spl1: values.fsp_spl1,
+  olt_spl1: values.olt_spl1,
+  ports_actifs_spl1: values.ports_actifs_spl1,
+
+  fdt: values.fdt,
+  central: values.central,
+  remarque: values.remarque
+};
+
+// ✅ Si 2 splitters → on ajoute les champs du deuxième
+if (values.nombre_splitter >= 2) {
+  payload.ports_physiques_spl2 = values.ports_physiques_spl2;
+  payload.puissance_entree_spl2 = values.puissance_entree_spl2;
+  payload.puissance_sortie_spl2 = values.puissance_sortie_spl2;
+  payload.fsp_spl2 = values.fsp_spl2;
+  payload.olt_spl2 = values.olt_spl2;
+  payload.ports_actifs_spl2 = values.ports_actifs_spl2;
+}
+
+const response = await apiIntervention.post(`/send/${idDemande}/`, payload, {
+  headers: { Authorization: `Bearer ${token}` },
+});
+
       // Adaptez la réponse ici si nécessaire
       if (response.data && response.data.etat === "SUCCES") {
         const formattedData = {
@@ -381,6 +386,7 @@ const InterventionPage = () => {
                       name="ports_physiques_spl1"
                       error={!!touched.ports_physiques_spl1 && !!errors.ports_physiques_spl1}
                       helperText={touched.ports_physiques_spl1 && errors.ports_physiques_spl1}
+                      InputProps={{ inputProps: { min: 1, max: 8 } }}
                     />
                   </Grid>
                   <Grid item xs={12} sm={6} md={4}>
@@ -453,6 +459,7 @@ const InterventionPage = () => {
                       name="ports_actifs_spl1"
                       error={!!touched.ports_actifs_spl1 && !!errors.ports_actifs_spl1}
                       helperText={touched.ports_actifs_spl1 && errors.ports_actifs_spl1}
+                      InputProps={{ inputProps: { min: 1, max: 8 } }}
                     />
                   </Grid>
                 </Grid>
@@ -479,6 +486,7 @@ const InterventionPage = () => {
                       name="ports_physiques_spl2"
                       error={!!touched.ports_physiques_spl2 && !!errors.ports_physiques_spl2}
                       helperText={touched.ports_physiques_spl2 && errors.ports_physiques_spl2}
+                      InputProps={{ inputProps: { min: 1, max: 8 } }}
                     />
                   </Grid>
                   <Grid item xs={12} sm={6} md={4}>
@@ -551,6 +559,7 @@ const InterventionPage = () => {
                       name="ports_actifs_spl2"
                       error={!!touched.ports_actifs_spl2 && !!errors.ports_actifs_spl2}
                       helperText={touched.ports_actifs_spl2 && errors.ports_actifs_spl2}
+                      InputProps={{ inputProps: { min: 1, max: 8 } }}
                     />
                   </Grid>
                 </Grid>
@@ -667,20 +676,20 @@ const initialValues = {
   nombre_splitter: 1,
   
   // Splitter 1
-  ports_physiques_spl1: "0",
+  ports_physiques_spl1: "1",
   puissance_entree_spl1: "0",
   puissance_sortie_spl1: "0",
   fsp_spl1: "",
   olt_spl1: "",
-  ports_actifs_spl1: "0",
+  ports_actifs_spl1: "1",
   
   // Splitter 2
-  ports_physiques_spl2: "0",
+  ports_physiques_spl2: "1",
   puissance_entree_spl2: "0",
   puissance_sortie_spl2: "0",
   fsp_spl2: "",
   olt_spl2: "",
-  ports_actifs_spl2: "0",
+  ports_actifs_spl2: "1",
   
   fdt: "",
   central: "",
