@@ -73,7 +73,7 @@ const Modem = () => {
           setMessage("Modem assigné avec succès !");
           setTimeout(() => navigate("/dashboard"), 2000);
       } catch (error) {
-          setError(error.response?.data?.message || "Erreur lors de l'ajout du secteur.");
+          setError(error.response?.data?.message || "Erreur lors de l'assignemation du modem.");
       } finally {
           setLoading(false);
       }

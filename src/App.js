@@ -46,6 +46,7 @@ import InterventionListA from "./scenes/interventionLA";
 import InterventionDetailsA from "./scenes/interventionDetailA";
 import EditInterventionA from "./scenes/editeIntervention";
 import DemandeEnCours from "./scenes/demandeEnCours";
+import EditAbonne from "./scenes/abonneUpdate";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -110,6 +111,7 @@ function App() {
                   <Route path="/teamA/admins/details/:id" element={<AdminDetails />} />
                   <Route path="/proposition/:idDemande" element={<Proposition />} />
                   <Route path="/interventions/editA/:id" element={<EditInterventionA />} />
+                  {/* <Route path="/interventions/editA/:id" element={<EditInterventionA />} /> */}
                   <Route path="/add-users" element={<UserRegistrationForm />} />
                   <Route path="/cree-demande" element={<CreeDemande />} />
                   <Route path="/liste-demande" element={<DemandeLA />} />
@@ -123,6 +125,7 @@ function App() {
                   <Route path="/intervention-list" element={<InterventionList />} />
                   <Route path="/intervention-listA" element={<InterventionListA />} />
                   <Route path="/abonnes/details/:id" element={<AbonneDetails />} />
+                  <Route path="/abonnes/update/:id" element={<EditAbonne />} />
                 
                 </Route>
               </Routes>

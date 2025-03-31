@@ -23,7 +23,8 @@ import {
   FilterListOutlined as FilterIcon, 
   CloudDownloadOutlined as ExportIcon,
   VisibilityOutlined as ViewIcon,
-  DeleteOutlined as DeleteIcon
+  DeleteOutlined as DeleteIcon,
+  EditOutlined as EditIcon
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import Header from "../../components/Header";
@@ -99,6 +100,15 @@ const Team = () => {
               <ViewIcon />
             </IconButton>
           </Tooltip>
+          <Tooltip title="Modifier l'intervention">
+            <IconButton 
+              size="small" 
+              color="secondary"
+              onClick={() => handleEditAbonne(params.row)}
+            >
+              <EditIcon />
+            </IconButton>
+          </Tooltip>
           <Tooltip title="Supprimer le technicien">
             <IconButton 
               size="small" 
@@ -156,6 +166,25 @@ const Team = () => {
       console.error("❌ Erreur lors de la désactivation de l'utilisateur :", error);
     }
   };
+
+    // Gestionnaires d'actions
+    const handleEditAbonne = (user) => {
+      navigate(`/abonnes/update/${user.id}/`);
+    };
+
+  // const handleEditAbonne = async (userId) => {
+  //   try {
+  //     await apiAccount.patch(`/abonnes/${userId}/update/`, null, {
+  //       headers: { Authorization: `Bearer ${token}` },
+  //     });
+  
+  //     setUsers(users.map(user => 
+  //       user.id === userId ? { ...user, is_active: false } : user
+  //     ));
+  //   } catch (error) {
+  //     console.error("❌ Erreur lors de la mise a jours de l'abonnée :", error);
+  //   }
+  // };
   
     
 
